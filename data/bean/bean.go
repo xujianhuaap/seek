@@ -3,6 +3,7 @@ package bean
 import (
 	"database/sql"
 	"fmt"
+	"github.com/xujianhuaap/seek/data"
 )
 
 type User struct {
@@ -11,11 +12,32 @@ type User struct {
 	PassWord string `json:"pass_word"`
 }
 
+func WriteUserToDB(mobile,password string) bool {
+	db,err:= sql.Open(data.DataBaseType,data.DataBaseLoginInfo)
+	if err != nil {
+		panic(err)
+	}
+	err=db.Ping()
+	if err != nil {
+		panic(err)
+	}
+	stmIn,err:=db.Prepare("INSERT INTO user VALUES (?,?,?,?)")
+	if(err != nil) {
+		panic(err)
+	}
+	_,err = stmIn.Exec(nil,mobile,password,nil)
+
+	if err != nil {
+		return false
+	}
+	return true
+
+}
 func LoadUserFromDB(mobile,password string) bool {
 	fmt.Printf("LoadUserFromDB mobile\t%v\tpassword\t%v\t\n",mobile,password)
 
 	var aMobile,aPassword string
-	db, err := sql.Open("mysql", "root:123456@/seek")
+	db, err := sql.Open(data.DataBaseType,data.DataBaseLoginInfo)
 	if err != nil{
 		panic(err)
 	}

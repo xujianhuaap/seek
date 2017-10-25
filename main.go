@@ -16,4 +16,5 @@ func main() {
 func init()  {
 	beego.Router(controllers.Api_Index,&controllers.IndexController{})
 	beego.Router(controllers.Api_Login,&controllers.LoginController{})
+	beego.Router(controllers.Api_Register,&controllers.RegisterController{})
 }
