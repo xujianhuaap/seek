@@ -11,9 +11,23 @@ type User struct {
 	Mobile string `json:"mobile"`
 	PassWord string `json:"pass_word"`
 }
-
+func DeleteUserFromDB(id int64) bool {
+	db,err:= sql.Open(data.DataBaseType,data.DataBaseLoginInfo)
+	defer db.Close()
+	if err == nil {
+		err=db.Ping()
+		if err == nil {
+			_,err := db.Exec("DELETE FROM user where id = ?",id)
+			if err == nil{
+				return true
+			}
+		}
+	}
+	return false
+}
 func WriteUserToDB(mobile,password string) bool {
 	db,err:= sql.Open(data.DataBaseType,data.DataBaseLoginInfo)
+	defer db.Close()
 	if err != nil {
 		panic(err)
 	}
@@ -22,7 +36,8 @@ func WriteUserToDB(mobile,password string) bool {
 		panic(err)
 	}
 	stmIn,err:=db.Prepare("INSERT INTO user VALUES (?,?,?,?)")
-	if(err != nil) {
+	defer stmIn.Close()
+	if err != nil {
 		panic(err)
 	}
 	_,err = stmIn.Exec(nil,mobile,password,nil)

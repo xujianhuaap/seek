@@ -1,8 +1,15 @@
 package controllers
 
 const (
-	Api_Index = "/"
-	Api_Login = "/api/login"
-	Api_Register = "/api/register"
-
+	ApiIndex     = "/"
+	ApiLogin     = "/api/login"
+	ApiRegister = "/api/register"
 )
+
+const (
+	ErrInvalid = "无效的用户ID"
+	ErrDelete = "删除失败"
+)
+
+
+const OkDelete  = "用户注销成功"
