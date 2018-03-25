@@ -11,6 +11,10 @@ import (
 type LoginController struct {
 	beego.Controller
 }
+type User struct {
+	UserId string `json:"user_id"`
+	Mobile string `json:"mobile"`
+}
 
 func (this * LoginController)Get()  {
 	this.Ctx.WriteString("seek never stop")
@@ -26,18 +30,21 @@ func (this * LoginController)Post()  {
 	//fmt.Printf("Request URI \t%v\n",this.Ctx.Request.RequestURI)
 	//fmt.Printf("Request PostForm \t%v\n",this.Ctx.Request.PostForm)
 	fmt.Printf("Request MultipartForm \t%v\n",this.Ctx.Request.MultipartForm)
-
-	isExits := bean.LoadUserFromDB(this.Ctx.Request.Form.Get("mobile"),this.Ctx.Request.Form.Get("password"))
+	mobile:= this.Ctx.Request.Form.Get("mobile");
+	password := this.Ctx.Request.Form.Get("password");
+	isExits,tip := bean.LoadUserFromDB(mobile,password);
 
 	var resp interface{}
 	if isExits {
-		resp= net.Response{0,"login success",net.DataNil{}}
+		var data User = User{UserId:tip,Mobile:mobile}
+		resp= net.Response{0,"login success",&data}
 
 	}else {
-		resp= net.Response{1,"user not register",net.DataNil{}}
+		resp= net.Response{1,tip,net.DataNil{}}
 	}
 
-	byte,err:= json.Marshal(resp)
+	byte,err:= json.Marshal(&resp)
+	fmt.Printf("result\t%v\n",string(byte))
 	if err == nil {
 		this.Ctx.WriteString(string(byte))
 	}else {

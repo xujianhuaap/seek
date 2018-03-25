@@ -4,6 +4,7 @@ const (
 	ApiIndex     = "/"
 	ApiLogin     = "/api/login"
 	ApiRegister = "/api/register"
+	ApiImage = "/api/image"
 )
 
 const (

@@ -17,13 +17,21 @@ func (this *RegisterController) Post()  {
 	var mobile, password string
 	mobile = this.Ctx.Request.Form.Get("mobile")
 	password = this.Ctx.Request.Form.Get("password")
-	result := bean.WriteUserToDB(mobile,password)
 	var resp interface{}
-	if result {
-		resp = net.Response{0,"register success",net.DataNil{}}
+
+	result:=bean.HasLogin(mobile)
+	if(result){
+		resp = net.Response{1,"registered",net.DataNil{}}
 	}else {
-		resp = net.Response{1,"register failure",net.DataNil{}}
+		result = bean.WriteUserToDB(mobile,password)
+
+		if result {
+			resp = net.Response{0,"register success",net.DataNil{}}
+		}else {
+			resp = net.Response{1,"register failure",net.DataNil{}}
+		}
 	}
+
 	json,err := json.Marshal(resp)
 	if err != nil {
 		this.Ctx.WriteString("{}")

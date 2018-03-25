@@ -35,12 +35,12 @@ func WriteUserToDB(mobile,password string) bool {
 	if err != nil {
 		panic(err)
 	}
-	stmIn,err:=db.Prepare("INSERT INTO user VALUES (?,?,?,?)")
+	stmIn,err:=db.Prepare("INSERT INTO user VALUES (?,?,?,?,?)")
 	defer stmIn.Close()
 	if err != nil {
 		panic(err)
 	}
-	_,err = stmIn.Exec(nil,mobile,password,nil)
+	_,err = stmIn.Exec(nil,mobile,"unkown",password,nil)
 
 	if err != nil {
 		return false
@@ -48,10 +48,11 @@ func WriteUserToDB(mobile,password string) bool {
 	return true
 
 }
-func LoadUserFromDB(mobile,password string) bool {
+func LoadUserFromDB(mobile,password string) (bool,string) {
 	fmt.Printf("LoadUserFromDB mobile\t%v\tpassword\t%v\t\n",mobile,password)
 
 	var aMobile,aPassword string
+	 var aId string;
 	db, err := sql.Open(data.DataBaseType,data.DataBaseLoginInfo)
 	if err != nil{
 		panic(err)
@@ -62,13 +63,46 @@ func LoadUserFromDB(mobile,password string) bool {
 		panic(err)
 	}
 
-	err = db.QueryRow("SELECT mobile,password FROM user where mobile = ? and password = ?",mobile,password).Scan(&aMobile,&aPassword)
+	err = db.QueryRow("SELECT mobile,password,id FROM user where mobile = ?",mobile).Scan(&aMobile,&aPassword,&aId)
 	fmt.Printf("query result Mobile %v\t,Password %v \t\n",aMobile,aPassword)
 	if err != nil {
-		return false
+		return false,"waitting for a moment retry"
 	}else {
+		if(aMobile != ""){
+			if(aPassword != password){
+				return false,"password not conrrect"
+			}else {
+				return true,aId;
+			}
+		}else {
+			return false,"has not reistered"
+		}
+
+	}
+
+}
+
+func HasLogin(mobile string) bool {
+	fmt.Printf("HasLogin mobile\t%v\n",mobile)
+
+	var aMobile string
+	db, err := sql.Open(data.DataBaseType,data.DataBaseLoginInfo)
+	if err != nil{
+		panic(err)
+	}
+	defer db.Close()
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.QueryRow("SELECT mobile FROM user where mobile = ?",mobile).Scan(&aMobile)
+
+	if err == nil && aMobile != "" {
+		fmt.Printf("query result Mobile %v\t\n",aMobile)
 		return true
 	}
+	return false
 
 }
 type UserInfo struct {
