@@ -1,0 +1,25 @@
+<svg version="1.1"
+     baseProfile="full"
+     width="200" height="200"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--颜色渐变-->
+    <defs>
+        <linearGradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+            <stop class="stop1" stop-color="#CCCC00" offset="0%"/>
+            <stop class="stop2" stop-color="#999933" offset="40%"/>
+            <stop class="stop3" stop-color="#99CC00" offset="100%"/>
+        </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="#CCCCCC" />
+
+    <circle cx="100" cy="100" r="80" fill="url(#Gradient1)" >
+        <!--<animateMotion path=" M 50 200 A 100 100 0 0 0 250 200"-->
+                       <!--dur="1s" repeatCount="indefinite" rotate="auto" />-->
+
+        <!--<animate attributeName="rotate" from="60" to="80" dur="1s" repeatCount="indefinite"> </animate>-->
+    </circle>
+
+    <text x="100" y="125" font-size="40" text-anchor="middle" fill="white">美 睫</text>
+
+</svg>

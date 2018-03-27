@@ -1,0 +1,84 @@
+<svg version="1.1"
+     baseProfile="full"
+     width="200" height="200"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--颜色渐变-->
+    <defs>
+        <linearGradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+            <stop class="stop1" stop-color="#FFFFFF" offset="0%"/>
+            <stop class="stop2" stop-color="#FF6666" offset="80%"/>
+            <stop class="stop3" stop-color="#f24884" offset="100%"/>
+        </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff" />
+
+    <circle cx="100" cy="100" r="80" fill="url(#Gradient1)" >
+        <!--<animateMotion path=" M 50 200 A 100 100 0 0 0 250 200"-->
+                       <!--dur="1s" repeatCount="indefinite" rotate="auto" />-->
+
+        <animateTransform
+                id="animate"
+                attributeName="transform"
+                begin="0s"
+                dur="0.2s"
+                type="rotate"
+                from="0 150 100"
+                to="1.2 150 100"
+                fill="freeze"
+                repeatCount="indefinite"
+        />
+        <!--<animate attributeName="rotate" from="60" to="80" dur="1s" repeatCount="indefinite"> </animate>-->
+    </circle>
+    <circle cx="100" cy="150" r="3" fill="#EAFFDF">
+        <!--<animateMotion path=" M 50 200 A 100 100 0 0 0 250 200"-->
+        <!--dur="1s" repeatCount="indefinite" rotate="auto" />-->
+
+        <animateTransform
+                attributeName="transform"
+                begin="0s"
+                dur="1.8s"
+                type="translate"
+                from="0 0"
+                to="0 -40"
+                fill="freeze"
+                repeatCount="indefinite"
+        />
+        <!--<animate attributeName="rotate" from="60" to="80" dur="1s" repeatCount="indefinite"> </animate>-->
+    </circle>
+    <circle cx="90" cy="152" r="5" fill="#EAFFDF">
+        <!--<animateMotion path=" M 50 200 A 100 100 0 0 0 250 200"-->
+        <!--dur="1s" repeatCount="indefinite" rotate="auto" />-->
+
+        <animateTransform
+                attributeName="transform"
+                begin="0s"
+                dur="1.3s"
+                type="translate"
+                from="0 0"
+                to="0 -50"
+                fill="freeze"
+                repeatCount="indefinite"
+        />
+        <!--<animate attributeName="rotate" from="60" to="80" dur="1s" repeatCount="indefinite"> </animate>-->
+    </circle>
+    <circle cx="110" cy="151" r="4" fill="#EAFFDF">
+        <!--<animateMotion path=" M 50 200 A 100 100 0 0 0 250 200"-->
+        <!--dur="1s" repeatCount="indefinite" rotate="auto" />-->
+
+        <animateTransform
+                attributeName="transform"
+                begin="0s"
+                dur="1.6s"
+                type="translate"
+                from="0 0"
+                to="0 -40"
+                fill="freeze"
+                repeatCount="indefinite"
+        />
+        <!--<animate attributeName="rotate" from="60" to="80" dur="1s" repeatCount="indefinite"> </animate>-->
+    </circle>
+
+    <text x="100" y="125" font-size="40" text-anchor="middle" fill="white">雅 客</text>
+
+</svg>
