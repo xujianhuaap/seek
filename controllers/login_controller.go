@@ -22,7 +22,12 @@ func (this * LoginController)Get()  {
 }
 
 func (this * LoginController)Post()  {
-	//fmt.Printf("Request Header \t%v\n",this.Ctx.Request.Header)
+	//resp,_:=httplib.Post("http://127.0.0.1:8098/api/wechat").Response()
+	//data,_:=ioutil.ReadAll(resp.Body)
+	//fmt.Printf("resp %v \n",string(data))
+
+
+	fmt.Printf("Request Header \t%v\n",this.Ctx.Request.Header)
 	fmt.Printf("Request Form \t%v\n",this.Ctx.Request.Form)
 	//buffer:= make([]byte,this.Ctx.Request.ContentLength)
 	//this.Ctx.Request.Body.Read(buffer)
@@ -50,6 +55,7 @@ func (this * LoginController)Post()  {
 	}else {
 		this.Ctx.WriteString("{}")
 	}
+
 
 
 

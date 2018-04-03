@@ -5,6 +5,8 @@ const (
 	ApiLogin     = "/api/login"
 	ApiRegister = "/api/register"
 	ApiImage = "/api/image"
+	ApiWechatAuth ="/api/wechat"
+	ApiProductList="/api/product"
 )
 
 const (
