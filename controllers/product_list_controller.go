@@ -12,15 +12,7 @@ type ProductListController struct {
 	beego.Controller
 }
 
-type Product struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Descript string `json:"descriptor"`
-	Price float64 `json:"price"`
-	SalePrice float64 `json:"sale_price"`
-	Category int64 `json:"category"`
-	ImgUrl string `json:"img_url"`
-}
+
 
 
 func (this * ProductListController)Get()  {
@@ -67,9 +59,6 @@ func (this * ProductListController)Post()  {
 	}
 	json,_:=json.Marshal(resp)
 	this.Ctx.WriteString(string(json))
-
 }
 
-func init()  {
-	orm.RegisterModel(new (Product))
-}
+

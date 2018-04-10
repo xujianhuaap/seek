@@ -22,6 +22,7 @@ func init()  {
 	beego.Router(controllers.ApiRegister,&controllers.RegisterController{})
 	beego.Router(controllers.ApiWechatAuth,&controllers.WechatAuthController{})
 	beego.Router(controllers.ApiProductList,&controllers.ProductListController{})
+	beego.Router(controllers.APiOrderList,&controllers.OrderListController{})
 	beego.SetStaticPath(controllers.ApiImage,"images")
 
 	orm.RegisterDriver("mysql", orm.DRMySQL)
